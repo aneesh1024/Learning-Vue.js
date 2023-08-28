@@ -1,17 +1,26 @@
 <template>
-    <h2 v-if="num === 0">Number is zero</h2>
-    <h2 v-else-if="num > 0">Number is greater than 0</h2>
-    <h2 v-else-if="num < 0">Number is less than zero</h2>
-    <h2 v-else>Not a Number</h2>
-
-    <template v-if="display">
-      <h2>Aneesh</h2>
-      <h2>Techfluencers</h2>
-      <h2>Vue</h2>
+   <h2 v-for="(profile, index) in profiles" :key="profile">
+    <div>{{ index+1 }}</div>
+      <div>{{ profile.name }}</div>
+      <div>{{ profile.id }}</div>
+   </h2>
+   <div v-for="actor in actors" :key="actor">
+      <h2>{{ actor.name }}</h2>
+      <h3 class="movie" v-for="movie in actor.movies" :key="movie">
+        {{ movie }}
+      </h3>
+   </div>
+   <h2 v-for="(value, key, index) in myInfo" :key="value">
+    {{ index }}.) {{ key.charAt(0).toUpperCase() + key.slice(1) }} : {{ value }}</h2>
+    <template v-for="name in names" :key="name" >
+      <h4>
+        {{ name }}
+      </h4>
+      <hr>
     </template>
-
-    <h2 v-show="show">Using v-show</h2>
-    <h2 v-if="show">Using v-show</h2>
+    <template v-for="n in numbers" :key="n">
+      <span v-if="n > 50">{{ n }} &nbsp;</span>
+    </template>
 </template>
 <script>
 
@@ -19,9 +28,33 @@ export default {
   name: 'App',
   data() {
     return {
-      num:'hello',
-      display:false,
-      show:false,
+      names:['Goku','Ichigo','Naruto','Luffy','Natsu','Asta','Deku','Yuji',"Tanjiro"],
+      numbers: [10,20,34,11,33,49,40,80,60,89,63],
+      profiles: [{
+        name: 'Tony',
+        id:'1a223b'
+      }, {
+        name: 'Steve',
+        id: '1be33a'
+      }, {
+        name: 'Ray',
+        id: '2a4cc9'
+      }],
+      actors:[
+        {
+          name: 'Christian Bale',
+          movies: ['Batman','The Prestige']
+        },
+        {
+          name: 'Di Caprio',
+          movies: ['Titanic','Inception']
+        }
+      ],
+      myInfo:{
+        name:'Aneesh',
+        course:'Computer Science',
+        id:'303a10222c1052a'
+      }
     }
   },
 }
@@ -33,20 +66,15 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #eee;
   margin-top: 60px;
+  background: #2c3e50;
 }
-.underline{
-  text-decoration: underline red dashed;
+body{
+  background: #222;
+
 }
-.danger{
-  color: #d64141;
-}
-.success{
-  color: #28cc5f;
-}
-.big{
-  font-style: italic;
-  font-size: 2.5rem;
+.movie{
+  color: tomato;
 }
 </style>
