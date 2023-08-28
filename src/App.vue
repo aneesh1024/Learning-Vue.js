@@ -1,26 +1,11 @@
 <template>
-   <h2 v-for="(profile, index) in profiles" :key="profile">
-    <div>{{ index+1 }}</div>
-      <div>{{ profile.name }}</div>
-      <div>{{ profile.id }}</div>
-   </h2>
-   <div v-for="actor in actors" :key="actor">
-      <h2>{{ actor.name }}</h2>
-      <h3 class="movie" v-for="movie in actor.movies" :key="movie">
-        {{ movie }}
-      </h3>
-   </div>
-   <h2 v-for="(value, key, index) in myInfo" :key="value">
-    {{ index }}.) {{ key.charAt(0).toUpperCase() + key.slice(1) }} : {{ value }}</h2>
-    <template v-for="name in names" :key="name" >
-      <h4>
-        {{ name }}
-      </h4>
-      <hr>
-    </template>
-    <template v-for="n in numbers" :key="n">
-      <span v-if="n > 50">{{ n }} &nbsp;</span>
-    </template>
+  <h2>{{ 2+3+10 }}</h2>
+  <h2>{{ sum(10,20,30) }}</h2>
+  <h2>{{ product(30) }}</h2>
+  <h2>{{ mulitply(11) }}</h2>
+  <h2>{{ mulitply(pi).toPrecision(4) }}</h2>
+  <h2>{{ writeHello(1000) }}</h2>
+  <button v-on:click="btnClicked()">Click Me</button>
 </template>
 <script>
 
@@ -28,35 +13,28 @@ export default {
   name: 'App',
   data() {
     return {
-      names:['Goku','Ichigo','Naruto','Luffy','Natsu','Asta','Deku','Yuji',"Tanjiro"],
-      numbers: [10,20,34,11,33,49,40,80,60,89,63],
-      profiles: [{
-        name: 'Tony',
-        id:'1a223b'
-      }, {
-        name: 'Steve',
-        id: '1be33a'
-      }, {
-        name: 'Ray',
-        id: '2a4cc9'
-      }],
-      actors:[
-        {
-          name: 'Christian Bale',
-          movies: ['Batman','The Prestige']
-        },
-        {
-          name: 'Di Caprio',
-          movies: ['Titanic','Inception']
-        }
-      ],
-      myInfo:{
-        name:'Aneesh',
-        course:'Computer Science',
-        id:'303a10222c1052a'
-      }
+      baseMutliplyer:5,
+      pi:3.14,
     }
   },
+  methods:{
+    sum(a,b,c){
+      return a+b+c
+    },
+    product(a = 1,b = 1,c = 1){
+      return a*b*c
+    },
+    mulitply(num){
+      return num * this.baseMutliplyer
+    },
+    writeHello: (num) => {
+      return "Hello"+num
+    },
+    btnClicked(){
+      console.log('button clicked')
+      alert("Hello")
+    }
+  }
 }
 </script>
 
