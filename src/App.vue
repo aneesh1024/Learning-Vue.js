@@ -1,11 +1,20 @@
 <template>
-  <h2>{{ 2+3+10 }}</h2>
-  <h2>{{ sum(10,20,30) }}</h2>
-  <h2>{{ product(30) }}</h2>
-  <h2>{{ mulitply(11) }}</h2>
-  <h2>{{ mulitply(pi).toPrecision(4) }}</h2>
-  <h2>{{ writeHello(1000) }}</h2>
-  <button v-on:click="btnClicked()">Click Me</button>
+  <h2>
+    {{ name }}
+  </h2>
+  <div>
+    <button class="btn" @click="changeName('Batman',$event),increment(10)">Change Name</button>
+  </div>
+  <h2>{{ counter }}</h2>
+  <div>
+    <button class="btn" @click="increment(1)">Increment by 1</button>
+    &nbsp;
+    <button class="btn" @click="decrement(1)">Decrement by 1</button>
+    &nbsp;
+    <button class="btn" @click="increment(5)">Increment by 5</button>
+    &nbsp;
+    <button class="btn" @click="decrement(5)">Decrement by 5</button>
+  </div>
 </template>
 <script>
 
@@ -13,26 +22,20 @@ export default {
   name: 'App',
   data() {
     return {
-      baseMutliplyer:5,
-      pi:3.14,
+      name:'Aneesh',
+      counter:0
     }
   },
   methods:{
-    sum(a,b,c){
-      return a+b+c
+    increment(num){
+      this.counter += num;
     },
-    product(a = 1,b = 1,c = 1){
-      return a*b*c
+    decrement(num){
+      this.counter -= num;
     },
-    mulitply(num){
-      return num * this.baseMutliplyer
-    },
-    writeHello: (num) => {
-      return "Hello"+num
-    },
-    btnClicked(){
-      console.log('button clicked')
-      alert("Hello")
+    changeName(newName,event){
+      this.name = newName;
+      console.log(event)
     }
   }
 }
@@ -52,7 +55,22 @@ body{
   background: #222;
 
 }
-.movie{
-  color: tomato;
+.btn{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  font-weight: 600;
+  cursor: pointer;
+  border: 4px transparent solid;
+}
+.btn:active{
+  scale: 0.95;
+}
+.btn:hover{
+  border: #d83d29 4px solid;
 }
 </style>
