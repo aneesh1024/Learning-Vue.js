@@ -1,20 +1,76 @@
 <template>
-  <h2>
-    {{ name }}
-  </h2>
   <div>
-    <button class="btn" @click="changeName('Batman',$event),increment(10)">Change Name</button>
+    <pre>
+      {{ formValues }}
+    </pre>
   </div>
-  <h2>{{ counter }}</h2>
-  <div>
-    <button class="btn" @click="increment(1)">Increment by 1</button>
-    &nbsp;
-    <button class="btn" @click="decrement(1)">Decrement by 1</button>
-    &nbsp;
-    <button class="btn" @click="increment(5)">Increment by 5</button>
-    &nbsp;
-    <button class="btn" @click="decrement(5)">Decrement by 5</button>
-  </div>
+  <form @submit="submitForm">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" v-model="formValues.name">
+    </div>
+    <div>
+      <label for="profileSummary">Profile</label>
+      <textarea id="profileSummary" v-model="formValues.profielSummary" />
+    </div>
+    <div>
+      <label for="country">Country</label>
+      <select name="country" id="country" v-model="formValues.country">
+        <option value="">Select a country</option>
+        <option value="India">India</option>
+        <option value="Japan">Japan</option>
+        <option value="USA">USA</option>
+        <option value="Russia">Russia</option>
+      </select>
+    </div>
+    <div>
+      <label for="jobLocation">Job location</label>
+      <select name="jobLocation" multiple id="jobLocation" v-model="formValues.jobLocation">
+        <option value="India">India</option>
+        <option value="Japan">Japan</option>
+        <option value="USA">USA</option>
+        <option value="Russia">Russia</option>
+        <option value="Vietnam">Vietnam</option>
+        <option value="China">China</option>
+        <option value="Brazil">Brazil</option>
+        <option value="Nepal">Nepal</option>
+        <option value="Singapore">Singapore</option>
+      </select>
+    </div>
+    <div>
+      <input type="checkbox" name="remoteWork" id="remoteWork" v-model="formValues.remoteWork" true-value="yes" false-value="no">
+      <label for="remoteWork">Open for remote work ? </label>
+    </div>
+    <div>
+      <label for="skillSet">Skill set  </label>
+      <input type="checkbox" id="html" value="HTML" v-model="formValues.skillSet">
+      <label for="html">HTML</label>
+      <input type="checkbox" id="css" value="CSS" v-model="formValues.skillSet">
+      <label for="css">CSS</label>
+      <input type="checkbox" id="js" value="JS" v-model="formValues.skillSet">
+      <label for="js">JS</label>
+      <input type="checkbox" id="react" value="React" v-model="formValues.skillSet">
+      <label for="react">React</label>
+      <input type="checkbox" id="vue" value="Vue" v-model="formValues.skillSet">
+      <label for="vue">Vue</label>
+      <input type="checkbox" id="nodejs" value="Node.js" v-model="formValues.skillSet">
+      <label for="nodejs">Node.js</label>
+    </div>
+    <div>
+      <label for="skillSet">Experience</label>
+        <input type="radio" id="0-2" value="0-2" v-model="formValues.expreience">
+        <label for="0-2">0-2</label>
+        <input type="radio" id="3-5" value="3-5" v-model="formValues.expreience">
+        <label for="3-5">3-5</label>
+        <input type="radio" id="6-10" value="6-10" v-model="formValues.expreience">
+        <label for="6-10">6-10</label>
+        <input type="radio" id="10+" value="10+" v-model="formValues.expreience">
+        <label for="10+">10+</label>
+    </div>
+    <div>
+      <button class="btn" >Submit</button>
+    </div>
+  </form>
 </template>
 <script>
 
@@ -23,19 +79,22 @@ export default {
   data() {
     return {
       name:'Aneesh',
-      counter:0
+      counter:0,
+      formValues:{
+        name:'',
+        profielSummary:'',
+        country:'',
+        jobLocation: [],
+        remoteWork:"no",
+        skillSet:[],
+        expreience:''
+      }
     }
   },
   methods:{
-    increment(num){
-      this.counter += num;
-    },
-    decrement(num){
-      this.counter -= num;
-    },
-    changeName(newName,event){
-      this.name = newName;
-      console.log(event)
+    submitForm(event){
+      event.preventDefault();
+      console.log('Form Values',this.formValues);
     }
   }
 }
@@ -46,14 +105,12 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #eee;
+  margin: 5rem;
   margin-top: 60px;
-  background: #2c3e50;
 }
 body{
   background: #222;
-
 }
 .btn{
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -67,10 +124,37 @@ body{
   cursor: pointer;
   border: 4px transparent solid;
 }
-.btn:active{
-  scale: 0.95;
+
+form{
+  background: #2c3e50;
+  width: max-content;
 }
-.btn:hover{
-  border: #d83d29 4px solid;
+form > div{
+  border: 1px solid white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+form label{
+  margin: 1rem 10px;
+}
+
+
+form input, form textarea{
+  margin: 1rem 10px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid white;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+}
+form select{
+  padding: 5px 10px;
+  font-size: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  outline: none;
+}
+
 </style>
